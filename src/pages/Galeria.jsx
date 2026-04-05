@@ -1,6 +1,53 @@
 import { Link } from 'react-router-dom';
 
 export default function Galeria() {
+    
+    
+    const babyBracelets = [
+  {
+    title: 'Mini Love',
+    description: 'Diseño suave con acabado fino, detalle en oro laminado.',
+    price: '$28.000 COP',
+    image: '/images/baby-1.jpeg',
+  },
+  {
+    title: 'Mini Elegance',
+    description: 'Diseño elegante en versión mini, con acabado delicado y moderno.',
+    price: '28.000 COP',
+    image: '/images/baby-2.png',
+  },
+  {
+    title: 'Mini Aura',
+    description: 'Manilla suave y cómoda con un tono fresco y vibrante',
+    price: '$28.000 COP',
+    image: '/images/baby-3.png',
+  },
+  {
+    title: 'Pequeña Luz',
+    description: 'Manilla ligera y cómoda con detalles sutiles que resaltan su ternura.',
+    price: '18.000 COP',
+    image: '/images/baby-4.png',
+  },
+  {
+    title: 'Dulce Encanto',
+    description: 'Manilla en tono suave y con detalles brillantes que destacan con sutileza.',
+    price: '$18.000 COP',
+    image: '/images/baby-5.png',
+  },
+  {
+    title: 'Latido Rojo',
+    description: 'Tobillera cómoda y ajustable con un intenso tono rojo que transmite calidez y energia',
+    price: '$43.000 COP',
+    image: '/images/baby-6.png',
+  },
+  {
+    title: 'Brisa Azul',
+    description: 'Tobillera cómoda y ajustable con un tono azul lleno de serenidad',
+    price: '43.000 COP',
+    image: '/images/baby-7.png',
+  },
+];
+    
   const galleryItems = [
   {
     title: 'Azul Aura',
@@ -125,6 +172,8 @@ export default function Galeria() {
           </nav>
         </div>
       </header>
+          
+          
 
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(236,72,153,0.10),_transparent_35%),radial-gradient(circle_at_right,_rgba(251,191,36,0.16),_transparent_30%)]" />
@@ -143,9 +192,29 @@ export default function Galeria() {
    Detrás de cada manilla hay un proceso de diseño y cuidado por los detalles. Aquí puedes ver cómo trabajamos cada pieza, desde las combinaciones de hilo hasta los acabados que hacen que cada diseño se vea y se sienta especial.
 </p>
           </div>
-        </div>
-      </section>
+    
+                 
+          <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+  <a
+    href="#grid"
+    className="rounded-full bg-fuchsia-600 px-6 py-3 text-sm font-semibold text-white hover:bg-fuchsia-700"
+  >
+    Contáctanos
+  </a>
 
+  <a
+    href="https://wa.me/57XXXXXXXXXX?text=Hola,%20quiero%20información%20sobre%20manillas"
+    target="_blank"
+    className="rounded-full border border-zinc-300 px-6 py-3 text-sm font-semibold text-zinc-700 hover:border-fuchsia-300 hover:text-fuchsia-700"
+  >
+    Pedir por WhatsApp
+  </a>
+</div>
+
+          
+          </div>
+      </section>
+   
       <section id="grid" className="mx-auto max-w-7xl px-6 pb-16 lg:px-8 lg:pb-24">
         <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div className="max-w-2xl">
@@ -190,9 +259,109 @@ Explora nuestra colección y elige diseños que puedes usar todos los días o re
                    
             </article>
           ))}
-        </div>
+        
+            
+          <div className="mt-8 flex flex-col sm:flex-row gap-4">
+  
+
+ <a
+  href="https://instagram.com/tuusuario"
+  target="_blank"
+  className="ml-6 flex items-center justify-right text-right gap-2 rounded-full px-6 py-3 text-sm font-semibold text-white transition 
+             bg-gradient-to-r from-[#f58529] via-[#dd2a7b] to-[#8134af] 
+             hover:brightness-110"
+>
+  {/* Icono Instagram */}
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className="h-5 w-5"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    strokeWidth={1.8}
+  >
+    <rect x="3" y="3" width="18" height="18" rx="5" />
+    <circle cx="12" cy="12" r="4" />
+    <circle cx="17" cy="7" r="1.2" fill="currentColor" stroke="none" />
+  </svg>
+
+  Ver más en Instagram
+</a>
+</div>
+          
+          </div>
       </section>
 
+          
+          <section className="relative overflow-hidden py-16">
+
+  {/* Fondo tipo HERO (más intenso y enfocado) */}
+  <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(236,72,153,0.15),_transparent_40%),radial-gradient(circle_at_bottom_right,_rgba(251,191,36,0.18),_transparent_35%)]" />
+
+  {/* Base suave */}
+  <div className="absolute inset-0 bg-white/90" />
+
+  <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+    
+    {/* Header */}
+    <div className="mb-10">
+      <p className="text-sm font-medium uppercase tracking-[0.28em] text-fuchsia-600">
+        Colección Baby
+      </p>
+      <h2 className="mt-3 text-3xl font-semibold tracking-tight text-zinc-900">
+        Manillas para bebé
+      </h2>
+      <p className="mt-4 max-w-2xl text-base leading-8 text-zinc-600">
+        Diseños delicados, suaves y pensados para los más pequeños.
+      </p>
+    </div>
+
+    {/* Carrusel */}
+    <div className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide">
+      {babyBracelets.map((item, index) => (
+        <article
+          key={`${item.title}-${index}`}
+          className="min-w-[260px] max-w-[260px] flex-shrink-0 overflow-hidden rounded-[1.8rem] border border-zinc-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
+        >
+          <div className="p-3">
+            <img
+              src={item.image}
+              alt={item.title}
+              className="h-[260px] w-full rounded-[1.4rem] object-cover"
+            />
+          </div>
+
+          <div className="px-5 pb-5">
+            <p className="text-lg font-semibold text-zinc-900">
+              {item.title}
+            </p>
+
+            <p className="mt-2 text-sm leading-7 text-zinc-600">
+              {item.description}
+            </p>
+
+            <p className="mt-2 text-sm font-semibold text-zinc-600">
+              {item.price}
+            </p>
+          </div>
+        </article>
+      ))}
+    </div>
+        <div className="mt-8 text-center">
+  <a
+    href="https://wa.me/57XXXXXXXXXX?text=Hola,%20quiero%20manillas%20para%20bebé"
+    target="_blank"
+    className="rounded-full border border-zinc-300 px-6 py-3 text-sm font-semibold text-zinc-700 hover:border-fuchsia-300 hover:text-fuchsia-700"
+  >
+    Encarga para tu bebé
+  </a>
+</div>
+  </div>
+              
+      
+</section>
+          
+          
       <section className="bg-white py-16">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="rounded-[2rem] border border-zinc-200 bg-gradient-to-br from-white to-amber-50 p-8 shadow-sm lg:p-10">
@@ -202,25 +371,33 @@ Explora nuestra colección y elige diseños que puedes usar todos los días o re
                   Estilo Entre Nudos
                 </p>
                 <h3 className="mt-3 text-3xl font-semibold tracking-tight text-zinc-900">
-                  Una galería pensada para vender desde la imagen.
+                  Encuentra la manilla que conecta contigo.
                 </h3>
                 <p className="mt-4 max-w-2xl text-base leading-8 text-zinc-600">
-                  Aquí puedes mostrar fondos en mármol, piezas sobre mano,
-                  composiciones por color, sets combinados y primeros planos de
-                  detalles. Todo ayuda a que la marca se vea más cuidada,
-                  coherente y deseable.
+                     Cada pieza está diseñada para resaltar tu estilo y acompañarte en cualquier momento. 
+    Ya sea para uso diario o como un regalo especial, aquí encuentras diseños únicos, 
+    hechos a mano y con detalles que realmente marcan la diferencia.
                 </p>
-              </div>
+           <center className="mt-6">
+                  <a
+      href="https://wa.me/57XXXXXXXXXX?text=Hola,%20quiero%20información%20sobre%20manillas"
+      target="_blank"
+      className="rounded-full bg-fuchsia-600 px-6 py-3 text-sm font-semibold text-white text-center hover:bg-fuchsia-700"
+    >
+      Comprar ahora
+               </a></center>
+                </div>
+                
 
               <div className="rounded-[1.8rem] border border-amber-200 bg-white p-6">
                 <p className="text-lg font-semibold text-zinc-900">
-                  Ideas para esta galería
+                   ¿Por qué elegir Entre Nudos?
                 </p>
                <ul className="mt-4 space-y-3 text-sm leading-7 text-zinc-600">
-                  <li>• Diseños listos para usar o regalar</li>
-                  <li>• Combinaciones elegantes y modernas</li>
-                  <li>• Piezas hechas a mano con acabados finos</li>
-                  <li>• Opciones personalizadas según tu estilo</li>
+                   <li>• Diseños únicos que no encuentras en tiendas comunes</li>
+    <li>• Hechas a mano con atención en cada detalle</li>
+    <li>• Ideales para regalar o usar todos los días</li>
+    <li>• Posibilidad de crear piezas personalizadas</li>
                 </ul>
               </div>
             </div>
