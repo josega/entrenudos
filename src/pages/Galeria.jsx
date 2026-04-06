@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom';
+import Header from '../components/Header'; 
+import { getWhatsAppLink } from "../utils/contact";
 
 export default function Galeria() {
     
@@ -137,45 +139,11 @@ export default function Galeria() {
 ];
   return (
     <div className="min-h-screen bg-stone-50 text-zinc-800">
-      <header className="sticky top-0 z-50 border-b border-zinc-200/70 bg-white/90 backdrop-blur">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
-          <div className="flex items-center gap-3">
-            <div className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-full border border-amber-300 bg-white shadow-sm">
-              <img
-                src="/images/logo.png"
-                alt="Entre Nudos"
-                className="h-full w-full object-contain p-1"
-              />
-            </div>
-
-            <div>
-              <p className="text-lg font-medium tracking-wide">Entre Nudos</p>
-              <p className="text-xs uppercase tracking-[0.28em] text-zinc-500">
-                Galería
-              </p>
-            </div>
-          </div>
-
-          <nav className="flex items-center gap-3">
-            <Link
-              to="/"
-              className="rounded-full border border-zinc-300 bg-white px-4 py-2 text-sm font-medium text-zinc-700 transition hover:border-fuchsia-300 hover:text-fuchsia-700"
-            >
-              Volver al inicio
-            </Link>
-            <a
-              href="#grid"
-              className="rounded-full bg-fuchsia-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-fuchsia-700"
-            >
-              Ver fotos
-            </a>
-          </nav>
-        </div>
-      </header>
+     <Header />
           
           
 
-      <section className="relative overflow-hidden">
+      <section className="relative overflow-hidden hidden md:block">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(236,72,153,0.10),_transparent_35%),radial-gradient(circle_at_right,_rgba(251,191,36,0.16),_transparent_30%)]" />
 
         <div className="relative mx-auto max-w-7xl px-6 py-16 lg:px-8 lg:py-20">
@@ -195,15 +163,15 @@ export default function Galeria() {
     
                  
           <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-  <a
-    href="#grid"
+  <Link
+    to="/#contacto"
     className="rounded-full bg-fuchsia-600 px-6 py-3 text-sm font-semibold text-white hover:bg-fuchsia-700"
   >
     Contáctanos
-  </a>
+  </Link>
 
   <a
-    href="https://wa.me/57XXXXXXXXXX?text=Hola,%20quiero%20información%20sobre%20manillas"
+    href={getWhatsAppLink('Hola, quiero  hacer un pedido')}
     target="_blank"
     className="rounded-full border border-zinc-300 px-6 py-3 text-sm font-semibold text-zinc-700 hover:border-fuchsia-300 hover:text-fuchsia-700"
   >
@@ -215,7 +183,7 @@ export default function Galeria() {
           </div>
       </section>
    
-      <section id="grid" className="mx-auto max-w-7xl px-6 pb-16 lg:px-8 lg:pb-24">
+      <section id="grid" className=" mt-3 mx-auto max-w-7xl px-6 pb-16 lg:px-8 lg:pb-24">
         <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div className="max-w-2xl">
             <p className="text-sm font-medium uppercase tracking-[0.28em] text-fuchsia-600">
@@ -349,7 +317,7 @@ Explora nuestra colección y elige diseños que puedes usar todos los días o re
     </div>
         <div className="mt-8 text-center">
   <a
-    href="https://wa.me/57XXXXXXXXXX?text=Hola,%20quiero%20manillas%20para%20bebé"
+    href={getWhatsAppLink('Hola, quiero una manilla para bebé')}
     target="_blank"
     className="rounded-full border border-zinc-300 px-6 py-3 text-sm font-semibold text-zinc-700 hover:border-fuchsia-300 hover:text-fuchsia-700"
   >
@@ -380,11 +348,11 @@ Explora nuestra colección y elige diseños que puedes usar todos los días o re
                 </p>
            <center className="mt-6">
                   <a
-      href="https://wa.me/57XXXXXXXXXX?text=Hola,%20quiero%20información%20sobre%20manillas"
+      href={getWhatsAppLink('Hola, quiero comprar una manilla')}
       target="_blank"
       className="rounded-full bg-fuchsia-600 px-6 py-3 text-sm font-semibold text-white text-center hover:bg-fuchsia-700"
     >
-      Comprar ahora
+      Pide la tuya
                </a></center>
                 </div>
                 

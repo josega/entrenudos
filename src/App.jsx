@@ -1,11 +1,14 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
 import Galeria from './pages/Galeria'
+import ScrollToHash from "./utils/ScrollToHash"
+
 
 export default function App() {
   return (
     <BrowserRouter>
-      <Routes>
+      <ScrollToHash />
+          <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/galeria" element={<Galeria />} />
       </Routes>
