@@ -8,6 +8,7 @@ export default function ScrollToHash() {
     if (hash) {
       const el = document.getElementById(hash.replace("#", ""));
       if (el) {
+          
         el.scrollIntoView({ behavior: "smooth" });
       }
     } else {

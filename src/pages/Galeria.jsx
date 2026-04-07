@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 import Header from '../components/Header'; 
+import Footer from '../components/Footer'; 
+
 import { getWhatsAppLink } from "../utils/contact";
 
 export default function Galeria() {
@@ -163,12 +165,12 @@ export default function Galeria() {
     
                  
           <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-  <Link
-    to="/#contacto"
+  <a
+    href={getWhatsAppLink('Hola, quiero ver el catalogo completo')}
     className="rounded-full bg-fuchsia-600 px-6 py-3 text-sm font-semibold text-white hover:bg-fuchsia-700"
   >
-    Contáctanos
-  </Link>
+    Solictar Catalogo
+  </a>
 
   <a
     href={getWhatsAppLink('Hola, quiero  hacer un pedido')}
@@ -204,17 +206,26 @@ Explora nuestra colección y elige diseños que puedes usar todos los días o re
               key={`${item.title}-${index}`}
               className="mb-5 break-inside-avoid overflow-hidden rounded-[1.8rem] border border-zinc-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl"
             >
-              <div className="p-3">
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  className={`w-full rounded-[1.4rem] object-cover ${item.height}`}
-                />
-              </div>
+             <div className="p-3 relative">
+  <img
+    src={item.image}
+    alt={item.title}
+    className={`w-full rounded-[1.4rem] object-cover ${item.height}`}
+  />
+
+  <a
+    href={getWhatsAppLink(`Hola, me interesa la '${item.title}'`)}
+    target="_blank"
+    rel="noreferrer"
+    className="absolute bottom-5 right-5 rounded-full bg-white/90 px-3 py-1 text-xs font-medium text-zinc-800 shadow-md backdrop-blur transition hover:bg-fuchsia-600 hover:text-white"
+  >
+    Comprar
+  </a>
+</div>
 
               <div className="px-5 pb-5">
                 <p className="text-lg font-semibold text-zinc-900">
-                  {item.title}
+                  {item.title} 
                 </p>
                 <p className="mt-2 text-sm leading-7 text-zinc-600">
                   {item.description}
@@ -224,7 +235,8 @@ Explora nuestra colección y elige diseños que puedes usar todos los días o re
                     </p>
               </div>
                     
-                   
+                
+                    
             </article>
           ))}
         
@@ -235,7 +247,7 @@ Explora nuestra colección y elige diseños que puedes usar todos los días o re
  <a
   href="https://instagram.com/tuusuario"
   target="_blank"
-  className="ml-6 flex items-center justify-right text-right gap-2 rounded-full px-6 py-3 text-sm font-semibold text-white transition 
+  className="ml-6 flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-white transition 
              bg-gradient-to-r from-[#f58529] via-[#dd2a7b] to-[#8134af] 
              hover:brightness-110"
 >
@@ -261,7 +273,7 @@ Explora nuestra colección y elige diseños que puedes usar todos los días o re
       </section>
 
           
-          <section className="relative overflow-hidden py-16">
+          <section id="bebes" className="relative overflow-hidden py-16">
 
   {/* Fondo tipo HERO (más intenso y enfocado) */}
   <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(236,72,153,0.15),_transparent_40%),radial-gradient(circle_at_bottom_right,_rgba(251,191,36,0.18),_transparent_35%)]" />
@@ -373,12 +385,7 @@ Explora nuestra colección y elige diseños que puedes usar todos los días o re
         </div>
       </section>
 
-      <footer className="border-t border-zinc-200 bg-white">
-        <div className="mx-auto flex max-w-7xl flex-col gap-4 px-6 py-8 text-sm text-zinc-500 sm:flex-row sm:items-center sm:justify-between lg:px-8">
-          <p>© 2026 Entre Nudos. Accesorios artesanales hechos con hilo y piedras.</p>
-          <p>Instagram · WhatsApp · Pedidos personalizados</p>
-        </div>
-      </footer>
+     <Footer/>
     </div>
   );
 }

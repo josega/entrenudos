@@ -40,7 +40,7 @@ export default function Header({
           showNav && (
             <nav className="hidden items-center gap-8 text-sm text-zinc-600 md:flex">
               <a href="/" className="hover:text-fuchsia-600">Inicio</a>
-             <a href="#nosotros" className="hover:text-fuchsia-600">Nosotros</a>
+             <a href="/#nosotros" className="hover:text-fuchsia-600">Nosotros</a>
               <Link to="/galeria" className="hover:text-fuchsia-600">Galería</Link>
               <a href="/#contacto" className="hover:text-fuchsia-600">Contacto</a>
             </nav>
@@ -62,7 +62,7 @@ export default function Header({
           <nav className="flex flex-col gap-4 px-6 py-6 text-sm text-zinc-700">
             <a href="/" onClick={() => setOpen(false)}>Inicio</a>
            
-              <a href="#nosotros" onClick={() => setOpen(false)}>Nosotros</a>
+              <a href="/#nosotros" onClick={() => setOpen(false)}>Nosotros</a>
             <Link to="/galeria" onClick={() => setOpen(false)}>Galería</Link>
             <a href="/#contacto" onClick={() => setOpen(false)}>Contacto</a>
           </nav>

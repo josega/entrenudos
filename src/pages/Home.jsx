@@ -1,6 +1,9 @@
 import Header from '../components/Header';
-import { Link } from 'react-router-dom';
+import Footer from '../components/Footer';
 
+import { Link } from 'react-router-dom';
+import { getWhatsAppLink } from "../utils/contact";
+import { useState } from "react";
 export default function Home() {
   const collections = [
     {
@@ -42,6 +45,8 @@ export default function Home() {
     },
   ];
 
+    const [subject, setSubject] = useState("");
+    
   return (
     <div className="min-h-screen bg-stone-50 text-zinc-800">
 <Header />
@@ -68,10 +73,10 @@ export default function Home() {
                 Ver galería
               </Link>
               <a
-                href="#contacto"
+                href={getWhatsAppLink('Hola, quiero  comprar una manilla')}
                 className="rounded-full border border-zinc-300 bg-white px-6 py-3 text-sm font-medium text-zinc-700 transition hover:border-fuchsia-300 hover:text-fuchsia-700"
               >
-                Solicitar información
+                Pedir por whatsapp
               </a>
             </div>
           </div>
@@ -144,12 +149,12 @@ export default function Home() {
       <section id="colecciones" className="bg-white py-16 lg:py-24">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="max-w-2xl">
-            <p className="text-sm font-medium uppercase tracking-[0.28em] text-fuchsia-600">Colecciones</p>
+            <p className="text-sm font-medium uppercase tracking-[0.28em] text-fuchsia-600">Diseños exclusivos</p>
             <h2 className="mt-4 text-3xl font-semibold tracking-tight text-zinc-900 sm:text-4xl">
-              Diseños pensados para distintos estilos y ocasiones.
+              Manillas hechas para acompañar tu estilo y tus momentos
             </h2>
             <p className="mt-4 text-base leading-8 text-zinc-600">
-              La marca puede ofrecer piezas delicadas para uso diario, manillas con piedras para regalos especiales y diseños personalizados según colores o preferencias del cliente.
+              Cada pieza de Entre Nudos es única. Diseñamos manillas artesanales que destacan por su estilo, equilibrio y detalles, creando accesorios versátiles que se adaptan a diferentes momentos: desde lo sutil y elegante para el día a día hasta piezas con mayor presencia para ocasiones especiales.
             </p>
           </div>
 
@@ -173,6 +178,22 @@ export default function Home() {
               </article>
             ))}
           </div>
+            <div className="mt-10 flex gap-4">
+  <Link
+    to="galeria"
+    className="rounded-full bg-fuchsia-600 px-6 py-3 text-sm font-medium text-white shadow-lg transition hover:bg-fuchsia-700"
+  >
+    Ver más diseños
+  </Link>
+
+  <a
+    href={getWhatsAppLink('Hola, quiero comprar una manilla, ¿cuáles tienen disponibles?')}
+    className="rounded-full border border-zinc-300 px-6 py-3 text-sm font-medium text-zinc-700 hover:border-fuchsia-300 hover:text-fuchsia-700"
+  >
+    Quiero una similar
+  </a>
+</div>
+            
         </div>
       </section>
 
@@ -192,7 +213,9 @@ export default function Home() {
     </div>
 
     <div className="grid gap-8 md:grid-cols-2">
-      <article className="group overflow-hidden rounded-[2rem] border border-fuchsia-100 bg-white shadow-[0_20px_60px_-30px_rgba(217,70,239,0.35)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_70px_-28px_rgba(217,70,239,0.45)]">
+      <Link to="galeria#bebes">
+       
+        <article className="group overflow-hidden rounded-[2rem] border border-fuchsia-100 bg-white shadow-[0_20px_60px_-30px_rgba(217,70,239,0.35)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_70px_-28px_rgba(217,70,239,0.45)]">
         <div className="relative aspect-[4/5] overflow-hidden bg-gradient-to-br from-fuchsia-100 via-rose-50 to-white">
           <img
             src="/images/baby-20.png"
@@ -216,8 +239,10 @@ export default function Home() {
           </p>
         </div>
       </article>
-
-      <article className="group overflow-hidden rounded-[2rem] border border-fuchsia-100 bg-white shadow-[0_20px_60px_-30px_rgba(217,70,239,0.35)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_70px_-28px_rgba(217,70,239,0.45)]">
+        </Link>
+        <Link to="galeria#bebes">
+        
+        <article className="group overflow-hidden rounded-[2rem] border border-fuchsia-100 bg-white shadow-[0_20px_60px_-30px_rgba(217,70,239,0.35)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_70px_-28px_rgba(217,70,239,0.45)]">
         <div className="relative aspect-[4/5] overflow-hidden bg-gradient-to-br from-pink-100 via-fuchsia-50 to-white">
           <img
             src="/images/baby-2.png"
@@ -225,14 +250,15 @@ export default function Home() {
             className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
           />
 
-          <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent p-6">
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent p-6">
             <span className="inline-flex rounded-full bg-white/85 px-3 py-1 text-xs font-medium uppercase tracking-[0.22em] text-fuchsia-600 backdrop-blur">
               Babies
             </span>
             <h3 className="mt-3 text-2xl font-semibold text-white">
               Suavidad y ternura en cada detalle
             </h3>
-          </div>
+              </div>
+            
         </div>
 
         <div className="p-6">
@@ -241,6 +267,7 @@ export default function Home() {
           </p>
         </div>
       </article>
+            </Link>
     </div>
   </div>
 </section>
@@ -250,12 +277,9 @@ export default function Home() {
           <div className="max-w-2xl">
             <p className="text-sm font-medium uppercase tracking-[0.28em] text-fuchsia-600">Galería</p>
             <h2 className="mt-4 text-3xl font-semibold tracking-tight text-zinc-900 sm:text-4xl">
-              Fotos de contenido para resaltar el detalle de cada manilla.
+              Explora nuestra colección y elige la manilla perfecta para ti 
             </h2>
-            <p className="mt-4 text-base leading-8 text-zinc-600">
-              Este espacio está pensado para mostrar fotografías de producto, tomas cercanas de texturas, combinaciones de colores y piezas puestas en mano o sobre fondos limpios.
-            </p>
-          </div>
+           </div>
         </div>
 
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
@@ -272,6 +296,22 @@ export default function Home() {
             </div>
           ))}
         </div>
+          
+                   <div className="mt-8 flex flex-wrap gap-4">
+              <Link
+                to="galeria"
+                className="rounded-full bg-fuchsia-600 px-6 py-3 text-sm font-medium text-white shadow-lg shadow-fuchsia-200 transition hover:scale-[1.02] hover:bg-fuchsia-700"
+              >
+                Explora la galería completa
+              </Link>
+              <a
+                href={getWhatsAppLink('Hola, quiero  comprar una manilla')}
+                className="rounded-full border border-zinc-300 bg-white px-6 py-3 text-sm font-medium text-zinc-700 transition hover:border-fuchsia-300 hover:text-fuchsia-700"
+              >
+                Pedir por Whatsapp
+              </a>
+            </div>
+          
       </section>
 
       <section className="bg-gradient-to-br from-fuchsia-600 to-fuchsia-700 py-16 text-white lg:py-20">
@@ -289,7 +329,13 @@ export default function Home() {
         Creamos manillas que representan vínculos, momentos y emociones. 
         Piezas hechas a mano donde cada detalle tiene intención y cada diseño conecta con quien lo lleva.
       </p>
-    </div>
+      <a
+  href={getWhatsAppLink('Hola, quiero ver el catalogo completo')}
+  className="mt-6 inline-flex rounded-full bg-white px-5 py-2 text-sm font-medium text-fuchsia-700 hover:bg-fuchsia-100"
+>
+  Solicitar Catalogo
+</a>
+      </div>
 
     <div className="rounded-[2rem] border border-white/20 bg-white/10 p-8 backdrop-blur-sm">
       <h3 className="text-2xl font-semibold">Nuestra esencia</h3>
@@ -301,6 +347,7 @@ export default function Home() {
         <li>• Detalles que hacen única cada pieza</li>
       </ul>
     </div>
+    
   </div>
 </section>
           
@@ -327,7 +374,7 @@ export default function Home() {
         </p>
 
         <a
-          href="#contacto"
+          href={getWhatsAppLink('Hola, quiero encargar una manilla para regalo')}
           className="mt-5 inline-flex rounded-full bg-white px-5 py-2 text-sm font-medium text-zinc-900 transition hover:bg-fuchsia-100"
         >
           Encargar para regalo
@@ -355,18 +402,19 @@ export default function Home() {
         </p>
 
         <a
-          href="#contacto"
+          href={getWhatsAppLink('Hola, quiero una manilla personalizada')}
           className="mt-5 inline-flex rounded-full bg-fuchsia-600 px-5 py-2 text-sm font-medium text-white transition hover:bg-fuchsia-700"
         >
           Solicitar manilla personalizada
         </a>
       </div>
     </article>
-
+<span id="contacto"></span>
+      
   </div>
 </section>
 
-      <section id="contacto" className="mx-auto max-w-7xl px-6 py-16 lg:px-8 lg:py-24">
+      <section id="contacto-form" className="mx-auto max-w-7xl px-6 py-16 lg:px-8 lg:py-24">
         <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
           <div>
             <p className="text-sm font-medium uppercase tracking-[0.28em] text-fuchsia-600">Contacto</p>
@@ -376,64 +424,111 @@ export default function Home() {
             <p className="mt-4 text-base leading-8 text-zinc-600">
               Puedes usar esta sección para recibir pedidos, resolver dudas, atender solicitudes personalizadas o dirigir a los clientes a WhatsApp e Instagram.
             </p>
+              <div class="mt-6" > <a href={getWhatsAppLink('')} class="rounded-full border border-zinc-300 bg-white px-6 py-3 text-sm font-medium text-zinc-700 transition hover:border-fuchsia-300 hover:text-fuchsia-700">Escribir por whatsapp</a></div>
           </div>
 
-          <form className="rounded-[2rem] border border-zinc-200 bg-white p-8 shadow-lg shadow-zinc-200/60">
-            <div className="grid gap-5 sm:grid-cols-2">
-              <div>
-                <label className="mb-2 block text-sm font-medium text-zinc-700">Nombre</label>
-                <input
-                  type="text"
-                  className="w-full rounded-2xl border border-zinc-300 px-4 py-3 outline-none transition focus:border-fuchsia-500"
-                  placeholder="Tu nombre"
-                />
-              </div>
-              <div>
-                <label className="mb-2 block text-sm font-medium text-zinc-700">Teléfono</label>
-                <input
-                  type="text"
-                  className="w-full rounded-2xl border border-zinc-300 px-4 py-3 outline-none transition focus:border-fuchsia-500"
-                  placeholder="Tu número"
-                />
-              </div>
-            </div>
+         <form className="rounded-[2rem] border border-zinc-200 bg-white p-8 shadow-lg shadow-zinc-200/60">
 
-            <div className="mt-5">
-              <label className="mb-2 block text-sm font-medium text-zinc-700">Correo</label>
-              <input
-                type="email"
-                className="w-full rounded-2xl border border-zinc-300 px-4 py-3 outline-none transition focus:border-fuchsia-500"
-                placeholder="Tu correo"
-              />
-            </div>
+  {/* Nombre + Teléfono */}
+  <div className="grid gap-5 sm:grid-cols-2">
+    <div>
+      <label className="mb-2 block text-sm font-medium text-zinc-700">Nombre</label>
+      <input
+        type="text"
+        className="w-full rounded-2xl border border-zinc-300 px-4 py-3 outline-none transition focus:border-fuchsia-500"
+        placeholder="Tu nombre"
+      />
+    </div>
 
-            <div className="mt-5">
-              <label className="mb-2 block text-sm font-medium text-zinc-700">Mensaje</label>
-              <textarea
-                rows="5"
-                className="w-full rounded-2xl border border-zinc-300 px-4 py-3 outline-none transition focus:border-fuchsia-500"
-                placeholder="Cuéntanos qué estilo te interesa o si deseas una pieza personalizada"
-              />
-            </div>
+    <div>
+      <label className="mb-2 block text-sm font-medium text-zinc-700">Teléfono</label>
+      <input
+        type="text"
+        className="w-full rounded-2xl border border-zinc-300 px-4 py-3 outline-none transition focus:border-fuchsia-500"
+        placeholder="Tu número"
+      />
+    </div>
+  </div>
 
-            <button
-              type="button"
-              className="mt-6 rounded-full bg-zinc-900 px-6 py-3 text-sm font-medium text-white transition hover:bg-zinc-800"
+  {/* Correo */}
+  <div className="mt-5">
+    <label className="mb-2 block text-sm font-medium text-zinc-700">Correo</label>
+    <input
+      type="email"
+      className="w-full rounded-2xl border border-zinc-300 px-4 py-3 outline-none transition focus:border-fuchsia-500"
+      placeholder="Tu correo"
+    />
+  </div>
+
+  {/* ASUNTO */}
+  <div className="mt-5">
+    <label className="mb-2 block text-sm font-medium text-zinc-700">Asunto</label>
+    
+    <input
+      type="text"
+         value={subject}
+  onChange={(e) => setSubject(e.target.value)}
+      className="w-full rounded-2xl border border-zinc-300 px-4 py-3 outline-none transition focus:border-fuchsia-500"
+      placeholder="Ej: Compra, regalo, diseño personalizado..."
+    />
+
+    {/* Sugerencias */}
+    <div className="mt-3 flex flex-wrap gap-2">
+      {['Comprar una manilla',
+  'Regalo',
+  'Diseño personalizado',
+  'Información general',
+  'Consulta de pedido',
+  'PQRS (peticiones, quejas o reclamos)'].map((item) => (
+        <button
+          key={item}
+          type="button"
+          className="rounded-full border border-zinc-300 px-3 py-1 text-xs text-zinc-600 hover:border-fuchsia-300 hover:text-fuchsia-600"
+        onClick={() => setSubject(item)}
             >
-              Enviar mensaje
-            </button>
-          </form>
+          {item}
+        </button>
+      ))}
+    </div>
+  </div>
+
+  {/* MENSAJE */}
+  <div className="mt-5">
+    <label className="mb-2 block text-sm font-medium text-zinc-700">Mensaje</label>
+    <textarea
+      rows="5"
+      className="w-full rounded-2xl border border-zinc-300 px-4 py-3 outline-none transition focus:border-fuchsia-500"
+      placeholder="Cuéntanos como podemos ayudarte"
+    />
+  </div>
+
+              <p className="mt-3 text-xs text-zinc-500">
+    Gracias por contactarnos, te responderemos lo antes posible para ayudarte con tu requerimiento.
+  </p>
+  {/* CTA */}
+  <div className="mt-6 flex flex-col sm:flex-row gap-3">
+
+    <button
+      type="button"
+      className="m-auto rounded-full bg-fuchsia-600 px-6 py-3 text-sm font-medium text-white shadow-lg shadow-fuchsia-200 transition hover:scale-[1.02] hover:bg-fuchsia-700"
+    >
+      Enviar solicitud
+    </button>
+
+   
+
+  </div>
+
+
+</form>
         </div>
       </section>
 
           
+          <Footer />
+
+     
           
-      <footer className="border-t border-zinc-200 bg-white">
-        <div className="mx-auto flex max-w-7xl flex-col gap-4 px-6 py-8 text-sm text-zinc-500 sm:flex-row sm:items-center sm:justify-between lg:px-8">
-          <p>© 2026 Entre Nudos. Accesorios artesanales hechos con hilo y piedras.</p>
-          <p>Instagram · WhatsApp · Pedidos personalizados</p>
-        </div>
-      </footer>
     </div>
   );
 }
