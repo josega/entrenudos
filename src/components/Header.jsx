@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 
 export default function Header({
-  subtitle = 'Manillas con hilo y piedras',
+  subtitle = 'Cada nudo cuenta',
   showNav = true,
   rightContent = null,
 }) {

@@ -17,7 +17,7 @@ export default function Galeria() {
   {
     title: 'Mini Elegance',
     description: 'Diseño elegante en versión mini, con acabado delicado y moderno.',
-    price: '28.000 COP',
+    price: '$28.000 COP',
     image: '/images/baby-2.png',
   },
   {
@@ -29,7 +29,7 @@ export default function Galeria() {
   {
     title: 'Pequeña Luz',
     description: 'Manilla ligera y cómoda con detalles sutiles que resaltan su ternura.',
-    price: '18.000 COP',
+    price: '$18.000 COP',
     image: '/images/baby-4.png',
   },
   {
@@ -47,7 +47,7 @@ export default function Galeria() {
   {
     title: 'Brisa Azul',
     description: 'Tobillera cómoda y ajustable con un tono azul lleno de serenidad',
-    price: '43.000 COP',
+    price: '$43.000 COP',
     image: '/images/baby-7.png',
   },
 ];
@@ -245,7 +245,7 @@ Explora nuestra colección y elige diseños que puedes usar todos los días o re
   
 
  <a
-  href="https://instagram.com/tuusuario"
+  href="https://instagram.com/entre_nudos.oficial"
   target="_blank"
   className="ml-6 flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-white transition 
              bg-gradient-to-r from-[#f58529] via-[#dd2a7b] to-[#8134af] 

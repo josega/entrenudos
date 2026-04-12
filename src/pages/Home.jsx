@@ -4,6 +4,12 @@ import Footer from '../components/Footer';
 import { Link } from 'react-router-dom';
 import { getWhatsAppLink } from "../utils/contact";
 import { useState } from "react";
+
+
+
+
+
+
 export default function Home() {
   const collections = [
     {
@@ -46,6 +52,159 @@ export default function Home() {
   ];
 
     const [subject, setSubject] = useState("");
+    
+    
+    const [status, setStatus] = useState(null);
+// null | 'success' | 'error'
+const [loading, setLoading] = useState(false);
+    
+    
+const [formData, setFormData] = useState({
+  name: '',
+  phone: '',
+  email: '',
+  message: '',
+});
+const [errors, setErrors] = useState({});
+const [touched, setTouched] = useState({});
+
+
+
+
+
+    
+    
+    
+    const handleChange = (e) => {
+  const { name, value } = e.target;
+
+  setFormData((prev) => ({
+    ...prev,
+    [name]: value,
+  }));
+
+  if (errors[name]) {
+    setErrors((prev) => ({
+      ...prev,
+      [name]: '',
+    }));
+  }
+};
+
+const handleBlur = (e) => {
+  const { name } = e.target;
+  setTouched((prev) => ({
+    ...prev,
+    [name]: true,
+  }));
+};
+
+const validateForm = () => {
+  const newErrors = {};
+
+  const trimmedName = formData.name.trim();
+  const trimmedPhone = formData.phone.trim();
+  const trimmedEmail = formData.email.trim();
+  const trimmedSubject = subject.trim();
+  const trimmedMessage = formData.message.trim();
+
+  if (!trimmedName) {
+    newErrors.name = 'Por favor ingresa tu nombre.';
+  } else if (trimmedName.length < 2) {
+    newErrors.name = 'El nombre debe tener al menos 2 caracteres.';
+  }
+
+  if (!trimmedPhone) {
+    newErrors.phone = 'Por favor ingresa tu teléfono.';
+  } else if (!/^[0-9+\-\s()]{7,20}$/.test(trimmedPhone)) {
+    newErrors.phone = 'Ingresa un número de teléfono válido.';
+  }
+
+  if (!trimmedEmail) {
+    newErrors.email = 'Por favor ingresa tu correo.';
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail)) {
+    newErrors.email = 'Ingresa un correo válido.';
+  }
+
+  if (!trimmedSubject) {
+    newErrors.subject = 'Por favor indica el asunto.';
+  } else if (trimmedSubject.length < 3) {
+    newErrors.subject = 'El asunto debe tener al menos 3 caracteres.';
+  }
+
+  if (!trimmedMessage) {
+    newErrors.message = 'Por favor escribe tu mensaje.';
+  } else if (trimmedMessage.length < 10) {
+    newErrors.message = 'El mensaje debe tener al menos 10 caracteres.';
+  }
+
+  return newErrors;
+};
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  const newErrors = validateForm();
+  setErrors(newErrors);
+
+  setTouched({
+    name: true,
+    phone: true,
+    email: true,
+    subject: true,
+    message: true,
+  });
+
+  if (Object.keys(newErrors).length > 0) {
+    return;
+  }
+
+  setLoading(true);
+  setStatus(null);
+
+  try {
+    const response = await fetch('https://formspree.io/f/mojyaqlj', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify({
+        name: formData.name,
+        phone: formData.phone,
+        email: formData.email,
+        subject,
+        message: formData.message,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error('Error al enviar el formulario');
+    }
+
+    setStatus('success');
+
+    setFormData({
+      name: '',
+      phone: '',
+      email: '',
+      message: '',
+    });
+    setSubject('');
+    setErrors({});
+    setTouched({});
+
+    setTimeout(() => {
+      setStatus(null);
+    }, 5000);
+  } catch (error) {
+    setStatus('error');
+  } finally {
+    setLoading(false);
+  }
+};
+    
+              
     
   return (
     <div className="min-h-screen bg-stone-50 text-zinc-800">
@@ -419,108 +578,201 @@ export default function Home() {
           <div>
             <p className="text-sm font-medium uppercase tracking-[0.28em] text-fuchsia-600">Contacto</p>
             <h2 className="mt-4 text-3xl font-semibold tracking-tight text-zinc-900 sm:text-4xl">
-              Conecta con Entre Nudos
+              ¿Te gustó alguna manilla? Hablemos
             </h2>
             <p className="mt-4 text-base leading-8 text-zinc-600">
-              Puedes usar esta sección para recibir pedidos, resolver dudas, atender solicitudes personalizadas o dirigir a los clientes a WhatsApp e Instagram.
+              Escríbenos para hacer tu pedido, consultar disponibilidad o crear un diseño a tu gusto.
+También puedes contactarnos por WhatsApp para una respuesta más rápida.
             </p>
               <div class="mt-6" > <a href={getWhatsAppLink('')} class="rounded-full border border-zinc-300 bg-white px-6 py-3 text-sm font-medium text-zinc-700 transition hover:border-fuchsia-300 hover:text-fuchsia-700">Escribir por whatsapp</a></div>
           </div>
 
-         <form className="rounded-[2rem] border border-zinc-200 bg-white p-8 shadow-lg shadow-zinc-200/60">
+         
+            
+            <form
+  onSubmit={handleSubmit}
+  noValidate
+  className="rounded-[2rem] border border-zinc-200 bg-white p-8 shadow-lg shadow-zinc-200/60"
+>
+                
+                {status === 'success' && (
+  <div className="mb-6 rounded-2xl border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700">
+    Tu mensaje fue enviado correctamente. Te responderemos pronto.
+  </div>
+)}
 
-  {/* Nombre + Teléfono */}
+{status === 'error' && (
+  <div className="mb-6 rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+    Ocurrió un error al enviar tu mensaje. Inténtalo nuevamente.
+  </div>
+)}
+                
+                
+                
   <div className="grid gap-5 sm:grid-cols-2">
     <div>
-      <label className="mb-2 block text-sm font-medium text-zinc-700">Nombre</label>
+      <label className="mb-2 block text-sm font-medium text-zinc-700">
+        Nombre
+      </label>
       <input
         type="text"
-        className="w-full rounded-2xl border border-zinc-300 px-4 py-3 outline-none transition focus:border-fuchsia-500"
+        name="name"
+        value={formData.name}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        className={`w-full rounded-2xl border px-4 py-3 outline-none transition ${
+          errors.name && touched.name
+            ? 'border-red-500 focus:border-red-500'
+            : 'border-zinc-300 focus:border-fuchsia-500'
+        }`}
         placeholder="Tu nombre"
       />
+      {errors.name && touched.name && (
+        <p className="mt-2 text-sm text-red-500">{errors.name}</p>
+      )}
     </div>
 
     <div>
-      <label className="mb-2 block text-sm font-medium text-zinc-700">Teléfono</label>
+      <label className="mb-2 block text-sm font-medium text-zinc-700">
+        Teléfono
+      </label>
       <input
         type="text"
-        className="w-full rounded-2xl border border-zinc-300 px-4 py-3 outline-none transition focus:border-fuchsia-500"
+        name="phone"
+        value={formData.phone}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        className={`w-full rounded-2xl border px-4 py-3 outline-none transition ${
+          errors.phone && touched.phone
+            ? 'border-red-500 focus:border-red-500'
+            : 'border-zinc-300 focus:border-fuchsia-500'
+        }`}
         placeholder="Tu número"
       />
+      {errors.phone && touched.phone && (
+        <p className="mt-2 text-sm text-red-500">{errors.phone}</p>
+      )}
     </div>
   </div>
 
-  {/* Correo */}
   <div className="mt-5">
-    <label className="mb-2 block text-sm font-medium text-zinc-700">Correo</label>
+    <label className="mb-2 block text-sm font-medium text-zinc-700">
+      Correo
+    </label>
     <input
       type="email"
-      className="w-full rounded-2xl border border-zinc-300 px-4 py-3 outline-none transition focus:border-fuchsia-500"
+      name="email"
+      value={formData.email}
+      onChange={handleChange}
+      onBlur={handleBlur}
+      className={`w-full rounded-2xl border px-4 py-3 outline-none transition ${
+        errors.email && touched.email
+          ? 'border-red-500 focus:border-red-500'
+          : 'border-zinc-300 focus:border-fuchsia-500'
+      }`}
       placeholder="Tu correo"
     />
+    {errors.email && touched.email && (
+      <p className="mt-2 text-sm text-red-500">{errors.email}</p>
+    )}
   </div>
 
-  {/* ASUNTO */}
   <div className="mt-5">
-    <label className="mb-2 block text-sm font-medium text-zinc-700">Asunto</label>
-    
+    <label className="mb-2 block text-sm font-medium text-zinc-700">
+      Asunto
+    </label>
+
     <input
       type="text"
-         value={subject}
-  onChange={(e) => setSubject(e.target.value)}
-      className="w-full rounded-2xl border border-zinc-300 px-4 py-3 outline-none transition focus:border-fuchsia-500"
+      name="subject"
+      value={subject}
+      onChange={(e) => {
+        setSubject(e.target.value);
+        if (errors.subject) {
+          setErrors((prev) => ({ ...prev, subject: '' }));
+        }
+      }}
+      onBlur={() =>
+        setTouched((prev) => ({
+          ...prev,
+          subject: true,
+        }))
+      }
+      className={`w-full rounded-2xl border px-4 py-3 outline-none transition ${
+        errors.subject && touched.subject
+          ? 'border-red-500 focus:border-red-500'
+          : 'border-zinc-300 focus:border-fuchsia-500'
+      }`}
       placeholder="Ej: Compra, regalo, diseño personalizado..."
     />
 
-    {/* Sugerencias */}
     <div className="mt-3 flex flex-wrap gap-2">
-      {['Comprar una manilla',
-  'Regalo',
-  'Diseño personalizado',
-  'Información general',
-  'Consulta de pedido',
-  'PQRS (peticiones, quejas o reclamos)'].map((item) => (
+      {[
+        'Comprar una manilla',
+        'Regalo',
+        'Diseño personalizado',
+        'Información general',
+        'Consulta de pedido',
+        'PQRS (peticiones, quejas o reclamos)',
+      ].map((item) => (
         <button
           key={item}
           type="button"
+          onClick={() => {
+            setSubject(item);
+            setTouched((prev) => ({ ...prev, subject: true }));
+            setErrors((prev) => ({ ...prev, subject: '' }));
+          }}
           className="rounded-full border border-zinc-300 px-3 py-1 text-xs text-zinc-600 hover:border-fuchsia-300 hover:text-fuchsia-600"
-        onClick={() => setSubject(item)}
-            >
+        >
           {item}
         </button>
       ))}
     </div>
+
+    {errors.subject && touched.subject && (
+      <p className="mt-2 text-sm text-red-500">{errors.subject}</p>
+    )}
   </div>
 
-  {/* MENSAJE */}
   <div className="mt-5">
-    <label className="mb-2 block text-sm font-medium text-zinc-700">Mensaje</label>
+    <label className="mb-2 block text-sm font-medium text-zinc-700">
+      Mensaje
+    </label>
     <textarea
       rows="5"
-      className="w-full rounded-2xl border border-zinc-300 px-4 py-3 outline-none transition focus:border-fuchsia-500"
-      placeholder="Cuéntanos como podemos ayudarte"
+      name="message"
+      value={formData.message}
+      onChange={handleChange}
+      onBlur={handleBlur}
+      className={`w-full rounded-2xl border px-4 py-3 outline-none transition ${
+        errors.message && touched.message
+          ? 'border-red-500 focus:border-red-500'
+          : 'border-zinc-300 focus:border-fuchsia-500'
+      }`}
+      placeholder="Cuéntanos cómo podemos ayudarte"
     />
+    {errors.message && touched.message && (
+      <p className="mt-2 text-sm text-red-500">{errors.message}</p>
+    )}
   </div>
 
-              <p className="mt-3 text-xs text-zinc-500">
+  <p className="mt-3 text-xs text-zinc-500">
     Gracias por contactarnos, te responderemos lo antes posible para ayudarte con tu requerimiento.
   </p>
-  {/* CTA */}
+
   <div className="mt-6 flex flex-col sm:flex-row gap-3">
-
-    <button
-      type="button"
-      className="m-auto rounded-full bg-fuchsia-600 px-6 py-3 text-sm font-medium text-white shadow-lg shadow-fuchsia-200 transition hover:scale-[1.02] hover:bg-fuchsia-700"
-    >
-      Enviar solicitud
-    </button>
-
-   
-
+<button
+  type="submit"
+  disabled={loading}
+  className="m-auto rounded-full bg-fuchsia-600 px-6 py-3 text-sm font-medium text-white shadow-lg shadow-fuchsia-200 transition hover:scale-[1.02] hover:bg-fuchsia-700 disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:scale-100"
+>
+  {loading ? 'Enviando...' : 'Enviar solicitud'}
+</button>
   </div>
-
-
 </form>
+            
+            
         </div>
       </section>
 

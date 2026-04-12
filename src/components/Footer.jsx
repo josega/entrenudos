@@ -23,7 +23,7 @@ export default function Footer() {
                   Entre Nudos
                 </p>
                 <p className="text-xs uppercase tracking-[0.28em] text-zinc-500">
-                  Manillas con hilo y piedras
+                  Cada nudo cuenta
                 </p>
               </div>
             </div>
@@ -103,7 +103,7 @@ export default function Footer() {
 
   {/* Instagram */}
   <a
-    href="https://instagram.com/tuusuario"
+    href="https://instagram.com/entre_nudos.oficial"
     target="_blank"
     rel="noreferrer"
     className="flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-white transition 
